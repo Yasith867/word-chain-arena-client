@@ -1,10 +1,50 @@
-// Mock API layer (frontend-only)
+// src/lib/api.ts
+// Frontend-only MOCK API for Netlify / demo builds
+
+function delay(ms = 400) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+/* =======================
+   USERS
+======================= */
+
+export async function createUser(username: string) {
+  await delay();
+  console.log("Mock createUser:", username);
+
+  return {
+    id: "local-user",
+    username,
+  };
+}
+
+/* =======================
+   GAMES
+======================= */
+
+export async function createGame() {
+  await delay();
+  console.log("Mock createGame");
+
+  return {
+    gameId: crypto.randomUUID(),
+  };
+}
+
+export async function joinGame(gameId: string) {
+  await delay();
+  console.log("Mock joinGame:", gameId);
+
+  return {
+    gameId,
+    playerId: "local-player",
+  };
+}
 
 export async function submitWord(word: string) {
+  await delay();
   console.log("Mock submitWord:", word);
-
-  // fake delay
-  await new Promise((r) => setTimeout(r, 500));
 
   return {
     success: true,
@@ -12,9 +52,8 @@ export async function submitWord(word: string) {
 }
 
 export async function leaveGame(gameId: string, userId: string) {
+  await delay();
   console.log("Mock leaveGame:", { gameId, userId });
-
-  await new Promise((r) => setTimeout(r, 300));
 
   return {
     success: true,
